@@ -1,10 +1,10 @@
-#!/usr/bin/bash
+#!/bin/bash
 
- source ./common.sh
+source ./common.sh
 
-check_root()
+check_root
 
-cp 2.1-mongo.repo /etc/yum.repos.d/mongo.repo
+cp mongo.repo /etc/yum.repos.d/mongo.repo
 VALIDATE $? "Adding Mongo repo"
 
 dnf install mongodb-org -y &>>$LOG_FILE
