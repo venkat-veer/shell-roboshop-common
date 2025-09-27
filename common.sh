@@ -64,7 +64,7 @@ app_setup(){
 }
 
 systemd_setup(){
-    cp $SCRIPT_DIR/3.1-$app_name.service /etc/systemd/system/$app_name.service
+    cp $SCRIPT_DIR/$app_name.service /etc/systemd/system/$app_name.service
     VALIDATE $? "Copy systemctl service"
 
     systemctl daemon-reload
