@@ -68,7 +68,7 @@ app_setup(){
     VALIDATE $? "Remove Existing Code"
 
     unzip /tmp/$app_name.zip &>>$LOG_FILE
-    VALIDATE $? "Unzip Catalogue"
+    VALIDATE $? "Unzip $app_name"
 }
                                                                                 # from 9-shipping.sh
 java_setup(){
