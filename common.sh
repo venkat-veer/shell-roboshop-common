@@ -33,7 +33,7 @@ VALIDATE(){ # functions receive inputs through args just like shell script args
         echo -e "$2 ... $G SUCCESS $N" | tee -a $LOG_FILE
     fi
 }
-                                                                        # from 3-catalogue .sh
+                                                                # from 3-catalogue.sh  from shell-roboshop
 nodejs_setup(){
     dnf module disable nodejs -y &>>$LOG_FILE
     VALIDATE $? "Disabling NodeJS"
@@ -69,6 +69,15 @@ app_setup(){
 
     unzip /tmp/$app_name.zip &>>$LOG_FILE
     VALIDATE $? "Unzip Catalogue"
+}
+                                                                                # from 9-shipping.sh
+java_setup(){
+    dnf install maven -y &>>$LOG_FILE
+    VALIDATE $? "Installing Maven application" 
+    mvn clean package &>>$LOG_FILE
+    VALIDATE $? "Packing the application"
+    mv target/shipping-1.0.jar shipping.jar &>>$LOG_FILE
+    VALIDATE $? "Rename the Artifact"
 }
 
 systemd_setup(){
