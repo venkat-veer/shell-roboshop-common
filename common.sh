@@ -47,6 +47,14 @@ nodejs_setup(){
 }
 
 app_setup(){
+    #idempotency
+    id roboshop &>>$LOG_FILE 
+    if [ $? -ne 0 ]; then
+        useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE   
+        VALIDATE $? "Create System User"
+    else
+        echo -e "User already Exists ... $Y SKIPPING $N"
+    fi
     mkdir -p /app
     VALIDATE $? "Creating App Directory"
 
@@ -81,5 +89,4 @@ print_total_time(){
     END_TIME=$(date +%s)
     TOTAL_TIME=$(( $END_TIME - $START_TIME ))
     echo -e "Script executed in: $Y $TOTAL_TIME Seconds $N"
-    
 }
